@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uttar Pradesh | Latest</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="up.py"></script>
+    <!-- <py-script src="orgg.py">
+    </py-script> -->
+    <div class="name">Uttar Pradesh</div>
+    <table></table>
+    <script>
+      function copyToClipboard(text) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        const popup = document.createElement("div");
+        popup.classList.add("popup");
+        popup.innerText = "Copied to clipboard. Open in a new tab.";
+        document.body.appendChild(popup);
+        setTimeout(() => {
+          document.body.removeChild(popup);
+        }, 3000);
+      }
+
+      onload = fetch("./up.csv")
+        .then((res) => {
+          return res.text();
+        })
+        .then((data) => {
+          let result = data.split(/\r?\n|\r/).map((row, index) => {
+            return row
+              .split(",")
+              .map((cell, cellIndex) => {
+                if (cellIndex === 0) {
+                  // Keep the first column
+                  return `<td>${cell}</td>`;
+                } else if (
+                  cell.startsWith("http://") ||
+                  cell.startsWith("https://")
+                ) {
+                  return `<td class="first-row"><button onclick="copyToClipboard('${cell}')">Copy Link</button></td>`;
+                } else {
+                  return `<td>${cell}</td>`;
+                }
+              })
+              .join("");
+          });
+
+          result.forEach((htmlRow, index) => {
+            let tableRow = document.createElement("tr");
+            tableRow.innerHTML = htmlRow.trim();
+
+            if (index === 0) {
+              // Add the 'first-row' class to the first row
+              tableRow.classList.add("first-row");
+            }
+
+            if (tableRow.innerText !== "") {
+              document.querySelector("table").appendChild(tableRow);
+            }
+          });
+        });
+    </script>
+  </body>
+</html>

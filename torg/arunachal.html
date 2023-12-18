@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arunachal Pradesh | Tender BY Organizations</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <style>
+      * {
+        margin: auto;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #ffcc80; /* Saffron background color */
+        margin: 0;
+      }
+
+      .popup {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ff7043; /* Darker Saffron */
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        animation: fadeOut 3s ease-in;
+      }
+
+      .name {
+        margin: auto;
+        text-align: center;
+        font-size: 70px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        color: #ff7043; /* Saffron color */
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 80%;
+        margin: auto;
+        border-collapse: collapse;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff; /* White background */
+      }
+
+      tr.first-row {
+        background-color: #ffcc80; /* Saffron for the first row */
+        color: white;
+      }
+
+      td {
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      td button {
+        background-color: #ff7043; /* Saffron color */
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 3px;
+      }
+
+      td button:hover {
+        background-color: #d84315; /* Darker Saffron on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <script src="aarrppdd.py"></script>
+    <!-- <py-script src="orgg.py">
+    </py-script> -->
+    <div class="name">Arunachal Pradesh</div>
+    <table></table>
+    <script>
+      function copyToClipboard(text) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        const popup = document.createElement("div");
+        popup.classList.add("popup");
+        popup.innerText = "Copied to clipboard. Open in a new tab.";
+        document.body.appendChild(popup);
+        setTimeout(() => {
+          document.body.removeChild(popup);
+        }, 3000);
+      }
+
+      onload = fetch("./arpd.csv")
+        .then((res) => {
+          return res.text();
+        })
+        .then((data) => {
+          let result = data.split(/\r?\n|\r/).map((row) => {
+            return row.split(",");
+          });
+
+          result.forEach((row) => {
+            let htmlRow = row
+              .map((cell) => {
+                if (cell.startsWith("http://") || cell.startsWith("https://")) {
+                  return `<td><button onclick="copyToClipboard('${cell}')">Copy Link</button></td>`;
+                } else {
+                  return `<td>${cell}</td>`;
+                }
+              })
+              .join("");
+
+            let tableRow = document.createElement("tr");
+            tableRow.innerHTML = htmlRow.trim();
+
+            if (tableRow.innerText !== "") {
+              document.querySelector("table").appendChild(tableRow);
+            }
+          });
+        });
+    </script>
+  </body>
+</html>

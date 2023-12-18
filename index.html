@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .popup {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    animation: fadeOut 3s ease-in;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            const popup = document.createElement('div');
+            popup.classList.add('popup');
+            popup.innerText = 'Copied to clipboard. Open in a new tab.';
+            document.body.appendChild(popup);
+            setTimeout(() => {
+                document.body.removeChild(popup);
+            }, 3000);
+        }
+
+        onload = fetch("./organization/Assam.csv").then(res => {
+            return res.text();
+        }).then(data => {
+            let result = data.split(/\r?\n|\r/).map(row => {
+                return row.split(",");
+            });
+
+            result.forEach(row => {
+                let htmlRow = row.map(cell => {
+                    if (cell.startsWith("http://") || cell.startsWith("https://")) {
+                        return `<td><button onclick="copyToClipboard('${cell}')">Copy Link</button></td>`;
+                    } else {
+                        return `<td>${cell}</td>`;
+                    }
+                }).join("");
+
+                let tableRow = document.createElement("tr");
+                tableRow.innerHTML = htmlRow.trim();
+
+                if (tableRow.innerText !== "") {
+                    document.querySelector("table").appendChild(tableRow);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        onload = fetch("./organization/Assam.csv").then(res => {
+            return res.text()
+        }).then(data => {
+            let result = data.split(/\r?\n|\r/).map(row => {
+                return row.split(",");
+            });
+
+            result.forEach(row => {
+                let htmlRow = row.map(cell => {
+                    if (cell.startsWith("http://") || cell.startsWith("https://")) {
+                        return `<td><button onclick="copyToClipboard('${cell}')">Copy Link</button></td>`;
+                    } else {
+                        return `<td>${cell}</td>`;
+                    }
+                }).join("");
+
+                let tableRow = document.createElement("tr");
+                tableRow.innerHTML = htmlRow.trim();
+
+                if (tableRow.innerText !== "") {
+                    document.querySelector("table").appendChild(tableRow);
+                }
+            });
+        });
+    </script>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        onload = fetch("./organization/Rajasthan.csv").then(res => {
+            return res.text()
+        }).then(data=>{
+            let result=data.split(/\r?\n|\r/).map(e=>{
+                return e.split(",")
+            })
+            result.forEach(e=>{
+                let m=e.map(e=>{
+                    if (e.startsWith("http://") || e.startsWith("https://")) {
+                        return `<td><a href="${e}" target="_blank">${e}</a></td>`;
+                    } else {
+                        return `<td>${e}</td>`;
+                    }
+                }).join("")
+                let ce=document.createElement("tr");
+                ce.innerHTML=m;
+                if(ce.innerText!=""){
+                    document.querySelector("table").appendChild(ce);
+                }
+                console.log(m)
+            })
+        })
+    </script>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        td{
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        onload = fetch("./organization/Assam.csv").then(res => {
+            return res.text()
+        }).then(data=>{
+            let result=data.split(/\r?\n|\r/).map(e=>{
+                return e.split(",")
+            })
+            result.forEach(e=>{
+                let m=e.map(e=>{
+                    return `<td>${e}</td>`;
+                }).join("")
+                let ce=document.createElement
+                ("tr");
+                ce.innerHTML=m;
+                if(ce.innerText!=""){
+                    document.querySelector("table").appendChild(ce);
+                }
+                console.log(m)
+            })
+        })
+    </script>
+</body>
+</html> -->

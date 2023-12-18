@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odisha | Tender BY Organizations</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <style>
+      * {
+        margin: auto;
+      }
+      .popup {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        animation: fadeOut 3s ease-in;
+      }
+
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      td {
+        border: 1px solid black;
+        justify-content: center;
+        text-align: center;
+        font-size: 30px;
+        margin: auto;
+        padding: 15px;
+      }
+
+      .name {
+        margin: auto;
+        text-align: center;
+        font-size: 70px;
+        font-family: "Zen Kaku Gothic Antique", sans-serif;
+        color: brown;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="odisha.py"></script>
+    <!-- <py-script src="orgg.py">
+    </py-script> -->
+    <div class="name">Odisha</div>
+    <table></table>
+    <script>
+      function copyToClipboard(text) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        const popup = document.createElement("div");
+        popup.classList.add("popup");
+        popup.innerText = "Copied to clipboard. Open in a new tab.";
+        document.body.appendChild(popup);
+        setTimeout(() => {
+          document.body.removeChild(popup);
+        }, 3000);
+      }
+
+      onload = fetch("./odisha.csv")
+        .then((res) => {
+          return res.text();
+        })
+        .then((data) => {
+          let result = data.split(/\r?\n|\r/).map((row) => {
+            return row.split(",");
+          });
+
+          result.forEach((row) => {
+            let htmlRow = row
+              .map((cell) => {
+                if (cell.startsWith("http://") || cell.startsWith("https://")) {
+                  return `<td><button onclick="copyToClipboard('${cell}')">Copy Link</button></td>`;
+                } else {
+                  return `<td>${cell}</td>`;
+                }
+              })
+              .join("");
+
+            let tableRow = document.createElement("tr");
+            tableRow.innerHTML = htmlRow.trim();
+
+            if (tableRow.innerText !== "") {
+              document.querySelector("table").appendChild(tableRow);
+            }
+          });
+        });
+    </script>
+  </body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        onload = fetch("./organization/Assam.csv").then(res => {
+            return res.text()
+        }).then(data => {
+            let result = data.split(/\r?\n|\r/).map(row => {
+                return row.split(",");
+            });
+
+            result.forEach(row => {
+                let htmlRow = row.map(cell => {
+                    if (cell.startsWith("http://") || cell.startsWith("https://")) {
+                        return `<td><button onclick="copyToClipboard('${cell}')">Copy Link</button></td>`;
+                    } else {
+                        return `<td>${cell}</td>`;
+                    }
+                }).join("");
+
+                let tableRow = document.createElement("tr");
+                tableRow.innerHTML = htmlRow.trim();
+
+                if (tableRow.innerText !== "") {
+                    document.querySelector("table").appendChild(tableRow);
+                }
+            });
+        });
+    </script>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        onload = fetch("./organization/Rajasthan.csv").then(res => {
+            return res.text()
+        }).then(data=>{
+            let result=data.split(/\r?\n|\r/).map(e=>{
+                return e.split(",")
+            })
+            result.forEach(e=>{
+                let m=e.map(e=>{
+                    if (e.startsWith("http://") || e.startsWith("https://")) {
+                        return `<td><a href="${e}" target="_blank">${e}</a></td>`;
+                    } else {
+                        return `<td>${e}</td>`;
+                    }
+                }).join("")
+                let ce=document.createElement("tr");
+                ce.innerHTML=m;
+                if(ce.innerText!=""){
+                    document.querySelector("table").appendChild(ce);
+                }
+                console.log(m)
+            })
+        })
+    </script>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        td{
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        onload = fetch("./organization/Assam.csv").then(res => {
+            return res.text()
+        }).then(data=>{
+            let result=data.split(/\r?\n|\r/).map(e=>{
+                return e.split(",")
+            })
+            result.forEach(e=>{
+                let m=e.map(e=>{
+                    return `<td>${e}</td>`;
+                }).join("")
+                let ce=document.createElement
+                ("tr");
+                ce.innerHTML=m;
+                if(ce.innerText!=""){
+                    document.querySelector("table").appendChild(ce);
+                }
+                console.log(m)
+            })
+        })
+    </script>
+</body>
+</html> -->
+
+<!-- Sr.No.,ORGANIZATION NAME,LINK
+1,ALIAH UNIVERSITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SxzpoUjP5AzvQwCGvV%2F4DNNS0Fec7wUuNy1YFXyqSerE%3D
+2,ANIMAL RESOURCES DEVELOPMENT DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SuQDt5FaBlMcwo9nIX%2BLXWA%3D%3D
+3,ASANSOL DURGAPUR DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SwwNwnkHC63IAe8zJ%2BO%2BKNtS0Fec7wUuNy1YFXyqSerE%3D
+4,BENFED - THE WEST BENGAL STATE CO-OPERATIVE MARKETING FEDERATION LIMITED,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Ssd40x65fCbfg1j3CCZWLxNS0Fec7wUuNy1YFXyqSerE%3D
+5,CHANGRABANDHA DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SagNvdvmU0Pxw2iCom2TOUdS0Fec7wUuNy1YFXyqSerE%3D
+6,CHILD DEVELOPMENT DEPARTMENT AND WD AND SW DEPT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SR4p3TYrFMbIBoHsxJBkRZQ%3D%3D
+7,CONSUMER AFFAIRS DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SwltxQKg7nlun3e%2Bcx3fBKtS0Fec7wUuNy1YFXyqSerE%3D
+8,CO-OPERATION DIRECTORATE (HEAD QUARTER),https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=STH6N0GB3jdhoB3Shhn1%2F0NS0Fec7wUuNy1YFXyqSerE%3D
+9,COUNTER INSURGENCY FORCE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SnPFmQ65MU3r48VZRW8be59S0Fec7wUuNy1YFXyqSerE%3D
+10,DEPARTMENT OF AGRICULTURE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SRkHOuP0ltyHMvNK1rtlHPtS0Fec7wUuNy1YFXyqSerE%3D
+11,DEPARTMENT OF CIVIL DEFENCE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SYe4m3NrWqJk%2BzEHVbe%2FBYw%3D%3D
+12,DEPARTMENT OF FOOD AND SUPPLIES,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S4%2FfOHX6O1ZVjdXmupL7Q2NS0Fec7wUuNy1YFXyqSerE%3D
+13,DEPARTMENT OF HIGHER EDUCATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SKV0O1UZ%2BZNpAB7J4dDCVLtS0Fec7wUuNy1YFXyqSerE%3D
+14,DEPARTMENT OF PASCHIMANCHAL UNNAYAN AFFAIRS,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S6k75z33oc0pcHRfLnq58J9S0Fec7wUuNy1YFXyqSerE%3D
+15,DEPARTMENT OF POWER,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=STyqy7enfMUbT2WS1zpRL%2F9S0Fec7wUuNy1YFXyqSerE%3D
+16,DEPARTMENT OF SCHOOL EDUCATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SxSO%2FuY6qSxCTQ1VYKSioQtS0Fec7wUuNy1YFXyqSerE%3D
+17,DIGHA SANKARPUR DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SZLkFwXvSpyddu2rv7tgHctS0Fec7wUuNy1YFXyqSerE%3D
+18,DIRECTORATE OF AGRICULTURE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SGwtQJVOzd7vZEiW7IkP50dS0Fec7wUuNy1YFXyqSerE%3D
+19,DIRECTORATE OF FISHERIES,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SPj1fp4UyfZSNWcUiqPusHw%3D%3D
+20,DIRECTORATE OF FORESTS,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SY72APCBUf3OzE3RemNdu5w%3D%3D
+21,DIRECTORATE OF MICRO SMALL AND MEDIUM ENTERPRISES,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SLY5AyUHiLyMt1Kk5JJ7FrNS0Fec7wUuNy1YFXyqSerE%3D
+22,DISTRICT HEALTH AND FAMILY WELFARE SAMITY - PASCHIM MEDINIPUR,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SNuPBswJUuK2rlIFIGuyQU9S0Fec7wUuNy1YFXyqSerE%3D
+23,DISTRICT MAGISTRATE BANKURA,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sz8uUoy3ddPsRR2nH%2BAlLv9S0Fec7wUuNy1YFXyqSerE%3D
+24,DISTRICT MAGISTRATE BIRBHUM,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SOWWa9Ia7Lmm9YaDMkTmyN9S0Fec7wUuNy1YFXyqSerE%3D
+25,DISTRICT MAGISTRATE BURDWAN,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SvMYfZMoWPyCHYG0HjoSG49S0Fec7wUuNy1YFXyqSerE%3D
+26,DISTRICT MAGISTRATE COOCH BEHAR,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S15523QCITKER7cc5ADqfZtS0Fec7wUuNy1YFXyqSerE%3D
+27,DISTRICT MAGISTRATE DAKSHIN DINAJPUR,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SID%2Bh01WtoOLmxDw4vux3stS0Fec7wUuNy1YFXyqSerE%3D
+28,DISTRICT MAGISTRATE DARJEELING,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=StJ%2BYmH9R6A8jkmRF6vcoWtS0Fec7wUuNy1YFXyqSerE%3D
+29,DISTRICT MAGISTRATE HOOGHLY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SRSPwPQGKZUH7jxXJrzRPw9S0Fec7wUuNy1YFXyqSerE%3D
+30,DISTRICT MAGISTRATE JALPAIGURI,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sn4DIIowBwZf%2F1zBZWAnw79S0Fec7wUuNy1YFXyqSerE%3D
+31,DISTRICT MAGISTRATE KALIMPONG,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SA31IbD6D6VIGuynDOUCKWdS0Fec7wUuNy1YFXyqSerE%3D
+32,DISTRICT MAGISTRATE MALDA,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SCywdk1FJJR%2Bf8aupTpAPc9S0Fec7wUuNy1YFXyqSerE%3D
+33,DISTRICT MAGISTRATE MURSHIDABAD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sj8QC1t1KN3JgjAeh4Q0fp9S0Fec7wUuNy1YFXyqSerE%3D
+34,DISTRICT MAGISTRATE NADIA,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sp5v2es2khlTCBSVSd5tRntS0Fec7wUuNy1YFXyqSerE%3D
+35,DISTRICT MAGISTRATE NORTH 24 PARGANAS,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SFoU36wMgFdArHmNJG%2BkvFNS0Fec7wUuNy1YFXyqSerE%3D
+36,DISTRICT MAGISTRATE PASCHIM MEDINIPUR,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S7cn2So%2FKRHPoKpgfzsFxOtS0Fec7wUuNy1YFXyqSerE%3D
+37,DISTRICT MAGISTRATE PURBA MEDINIPUR,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SiF0W4P%2Fb%2Fmz8XhFBqRHayNS0Fec7wUuNy1YFXyqSerE%3D
+38,DISTRICT MAGISTRATE PURULIA,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SkfPM9KTvNAnQ8lWpWZdCRtS0Fec7wUuNy1YFXyqSerE%3D
+39,DISTRICT MAGISTRATE SOUTH 24 PARGANAS,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SyBxVP%2BlbtzlCMvlOwBGax9S0Fec7wUuNy1YFXyqSerE%3D
+40,DISTRICT MAGISTRATE UTTAR DINAJPUR,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SnQ0Ab2Z%2BS6H6MNSL8wcyW9S0Fec7wUuNy1YFXyqSerE%3D
+41,GANGASAGAR BAKKHALI DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SJqIol5vYO9DAeUbOdFvlhNS0Fec7wUuNy1YFXyqSerE%3D
+42,GOLDEN CITY INDUSTRIAL TOWNSHIP AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SR0NU5wYP63R1T7Innoy53dS0Fec7wUuNy1YFXyqSerE%3D
+43,GORKHALAND TERRITORIAL ADMINISTRATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SeWQXsXz7bz4NsSwQIDDOZ9S0Fec7wUuNy1YFXyqSerE%3D
+44,HALDIA DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SC7VEasBb%2F7MRrJ6xK9sFyNS0Fec7wUuNy1YFXyqSerE%3D
+45,HEALTH AND FAMILY WELFARE DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Su9G242qi19lhe8jrpteMag%3D%3D
+46,HOOGHLY RIVER BRIDGE COMMISSIONERS,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S5HMZsbeaXJqzFp1XU4NftQ%3D%3D
+47,HOUSING DIRECTORATE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SFr5xBaZyDrpp1geSRbv8Dg%3D%3D
+48,INFORMATION AND CULTURAL AFFAIRS DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SzrWGe2omRwS4kkUKQoNi3tS0Fec7wUuNy1YFXyqSerE%3D
+49,INSTITUTE OF ENVIRONMENTAL STUDIES AND WETLAND MANAGEMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S%2FsMH4kYcF9qtCNFv78rU9dS0Fec7wUuNy1YFXyqSerE%3D
+50,IRRIGATION AND WATERWAYS DEPT.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SfUQ%2BU3TXJ9hX%2FS4Z%2BBK%2F%2FdS0Fec7wUuNy1YFXyqSerE%3D
+51,JADAVPUR UNIVERSITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=ScilhvGlDOmI9Zj8g15KpNdS0Fec7wUuNy1YFXyqSerE%3D
+52,JALPAIGUPI GOVERNMENT ENGINEERING COLLEGE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SccRPzDOjIkY%2FlbfFe9sXGdS0Fec7wUuNy1YFXyqSerE%3D
+53,KOLKATA METROPOLITAN DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sv%2FdI0%2FqYH%2FJ3hstBFYa10tS0Fec7wUuNy1YFXyqSerE%3D
+54,KOLKATA MUNICIPAL CORPORATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SM%2Fbr9ae%2FkkS4nUTpzjfVAQ%3D%3D
+55,KOLKATA POLICE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sz%2BXWHNXnO%2BHayV9nikg1oQ%3D%3D
+56,MACKINTOSH BURN LIMITED,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SJa4Ru2G8JZoRRYfmzk90CA%3D%3D
+57,MALDA MEDICAL COLLEGE AND HOSPITAL,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Ss%2B%2FzAp6iQJnXsZXpNCfbKNS0Fec7wUuNy1YFXyqSerE%3D
+58,MAULANA ABUL KALAM AZAD UNIVERSITY OF TECHNOLOGY WEST BENGAL,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S%2FEkf5eGO19TCYzAe21XahNS0Fec7wUuNy1YFXyqSerE%3D
+59,MIDNAPORE KHARAGPUR DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Skoefwkp3YgCczC7%2FyK8aF9S0Fec7wUuNy1YFXyqSerE%3D
+60,MINORITY AFFAIRS AND MADRASAH EDUCATION DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sd9qPsmHKAm48i1Lm8SJDRtS0Fec7wUuNy1YFXyqSerE%3D
+61,MOHABANI DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SKjPiZZ2EetMwVBeJEjWcLNS0Fec7wUuNy1YFXyqSerE%3D
+62,MUNICIPAL AFFAIRS DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S8JH53KqhP8qc%2BLoXjGrHaQ%3D%3D
+63,MURSHIDABAD MEDICAL COLLEGE AND HOSPITAL,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SabS26NOZKSuM4YZUo4iE7A%3D%3D
+64,NEW TOWN KOLKATA DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SrpA2GXqCvlOH1dstDS3Idw%3D%3D
+65,NORTH BENGAL DEVELOPMENT DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S4s7HwpeLeRl65QW%2BfBSi8g%3D%3D
+66,NORTH BENGAL STATE TRANSPORT CORPORATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S2Vt2xpCcTsrcfkr9yktxtw%3D%3D
+67,PANCHAYAT AND RURAL DEVELOPMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S3%2B7jRA5ZsktDdnsLwR9zSg%3D%3D
+68,PASCHIMBANGA AGRI MARKETING CORPORATION LTD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SE%2FWzGKC30cLyhqOgHRcpW9S0Fec7wUuNy1YFXyqSerE%3D
+69,PHE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sl20tHcROYLu%2BkL1B2ZoORA%3D%3D
+70,PRESIDENCY UNIVERSITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SUsYqFGZv7qh7gOAsZviO%2B9S0Fec7wUuNy1YFXyqSerE%3D
+71,PUBLIC SERVICE COMMISSION WEST BENGAL,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SvHFjG6bwXS%2F245o75hSwl9S0Fec7wUuNy1YFXyqSerE%3D
+72,PUBLIC WORKS DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SkUZyyCA2lSf5nTjFJAofK9S0Fec7wUuNy1YFXyqSerE%3D
+73,PWD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SBHgI013YJrPRYhqXDt5TRg%3D%3D
+74,PWD(ELECTRICAL),https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SGTcD%2BRUO7BhBfui0B%2FOiww%3D%3D
+75,PW(ROADS)(NH),https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SoF6FjpQuIeRKmQtPduGlRQ%3D%3D
+76,PW(ROADS)(SH),https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SHXzAeTkot7P4JDf%2FRD8GIA%3D%3D
+77,RABINDRA MAHAVIDYALAYA,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SihrhxJdVyMBqM2Mm5ZHjb9S0Fec7wUuNy1YFXyqSerE%3D
+78,SARASWATY PRESS LIMITED,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SN9xlYyKhX%2FendULCvwbg0dS0Fec7wUuNy1YFXyqSerE%3D
+79,SIDHO KANHO BIRSHA UNIVERSITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SRoBfZQkF2ZPzohYzI6i1qdS0Fec7wUuNy1YFXyqSerE%3D
+80,SILIGURI JALPAIGURI DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SNZzPMNqBpDDIrVxiddqom9S0Fec7wUuNy1YFXyqSerE%3D
+81,SOUTH BENGAL STATE TRANSPORT CORPORATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SkP9YKJiX0yaSrAFRfcQi6A%3D%3D
+82,SRINIKETAN SANTINIKETAN DEVELOPMENT AUTHORITY,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SO7iXJ7A2vi8u3Dyr5rXMxdS0Fec7wUuNy1YFXyqSerE%3D
+83,STATE WATER INVESTIGATION DTE.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SsUAEZn2%2B4xbOLHKRycwwxw%3D%3D
+84,SUNDARBAN AFFAIRS DEPARTMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S7r6eihtC3Z4C9vEoeqHfsQ%3D%3D
+85,TAMRALIPTA CO-OPERATIVE SPINNING MILLS LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SHZMiutCUmeE1EJ7Qxs%2Fx0dS0Fec7wUuNy1YFXyqSerE%3D
+86,THE CTC (1978) LTD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SkzhmvtV0s6%2BK1fjGtzn0vQ%3D%3D
+87,THE DURGAPUR PROJECTS LIMITED,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Sc%2FSF9cWRvZ0lYvYSV6hYVtS0Fec7wUuNy1YFXyqSerE%3D
+88,THE SHALIMAR WORKS (1980) LIMITED,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SjhCQpU4F9d4ZCvD3YhTW49S0Fec7wUuNy1YFXyqSerE%3D
+89,THE STATE FISHERIES DEVELOPMENT CORPORATION LTD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SJsCckZR%2BbE14N9fpk6Vibg%3D%3D
+90,THE WEST BENGAL POWER DEVELOPMENT CORPORATION LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SBtccLrpQa%2FTS5ZWVXHvHFNS0Fec7wUuNy1YFXyqSerE%3D
+91,TRAFFIC AND HIGHWAYS POLICE HQ,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S3U1ywBSC99b0441do0oP7NS0Fec7wUuNy1YFXyqSerE%3D
+92,UNIVERSITY OF CALCUTTA,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S3dTvc75vXwv%2FYx8D%2FowJCNS0Fec7wUuNy1YFXyqSerE%3D
+93,UNIVERSITY OF KALYANI,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SiXGsYNy55edjN7di4G2Jh9S0Fec7wUuNy1YFXyqSerE%3D
+94,URBAN DEVELOPMENT DEPARTMENT  SALT LAKE PROJECT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SH0%2Bx%2FqbXdh7Oq5oRlD3VHw%3D%3D
+95,WATER RESOURCES DEV. DTE.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S%2Bt7ylexecXeEINPR4PWtnw%3D%3D
+96,WB AGRO INDUSTRIES CORP.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SKGh6Dj7aUAWcvfYTA4sH4Q%3D%3D
+97,WB HIDCO LTD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SiegzoEnTJI5MwYoojnbI5w%3D%3D
+98,WBSIDCL,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SSrJAswtAP6cZSazMEKxlyg%3D%3D
+99,WB TRANSPORT INFRASTRUCTURE DEV. CORP. LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SlcFAaPXVxEAHbviR5LWD3Q%3D%3D
+100,WEBEL,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S9nWAOBAD2MB2mhgCDg9jAQ%3D%3D
+101,WEBEL TECHNOLOGY LIMITED,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SUAznQ9mBhx5GCYHtFRRm8g%3D%3D
+102,WEST BENGAL FOREST DEVELOPMENT CORPORATION LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SE%2Bt2OCJwLlS1MoQJ%2FmqZj9S0Fec7wUuNy1YFXyqSerE%3D
+103,WEST BENGAL INDUSTRIAL DEVELOPMENT CORPORATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SWDmvbQUSz6sCebXEku72MA%3D%3D
+104,WEST BENGAL INDUSTRIAL INFRASTRUCTURE DEVELOPMENT,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SLZosoASXwPlnwcG3wtgLTw%3D%3D
+105,WEST BENGAL MEDICAL SERVICES CORPORATION LIMITED,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SR2ASkyJhj3juBKJGM0aUtA%3D%3D
+106,WEST BENGAL MINERAL DEVELOPMENT AND TRADING CORP. LTD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SSa%2F6yMO%2B1LV%2Beulo7nz2jtS0Fec7wUuNy1YFXyqSerE%3D
+107,WEST BENGAL MINORITIES DEVELOPMENT AND FINANCE CORPORATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SFP6ZQzyKoS%2F99M3gj7bSqdS0Fec7wUuNy1YFXyqSerE%3D
+108,WEST BENGAL PHARMACEUTICAL AND PHYTOCHEMICAL DEV. CORPN. LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S%2BDk2SODmeRP%2BRBywz14TINS0Fec7wUuNy1YFXyqSerE%3D
+109,WEST BENGAL POLICE,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SOhaOMnSJAYa4ArYbATGy%2FdS0Fec7wUuNy1YFXyqSerE%3D
+110,WEST BENGAL POLICE RECRUITMENT BOARD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SQZNx2Up%2BMiBn0lE80G62h9S0Fec7wUuNy1YFXyqSerE%3D
+111,WEST BENGAL POLLUTION CONTROL BOARD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SVpqWCsLPyf93ARE8ncxNLw%3D%3D
+112,WEST BENGAL STATE AIDS PREVENTION AND CONTROL SOCI,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SnGKBGZPC0YWw0b2oBPGIdg%3D%3D
+113,WEST BENGAL STATE ELECTION COMMISSION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SEgNst%2BteZLubXerwTyWJxdS0Fec7wUuNy1YFXyqSerE%3D
+114,WEST BENGAL STATE ELECTRICITY DISTRIBUTION CO. LTD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SUth%2FOTOMKisxcRkXR6SyAQ%3D%3D
+115,WEST BENGAL STATE ELECTRICITY TRANSMISSION COMPANY LIMITED,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SsXU%2FZwIp%2Fd55FptvScFxRdS0Fec7wUuNy1YFXyqSerE%3D
+116,WEST BENGAL STATE FISHERMENS COOP.  FED. LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S0q7BSURV1TyGhrvvCFNKv9S0Fec7wUuNy1YFXyqSerE%3D
+117,WEST BENGAL STATE FOOD PROCESSING AND HORTICULTURE DEV. CORP. LTD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=Soi8YL5JJ%2Fm1FjHBMjEAsnNS0Fec7wUuNy1YFXyqSerE%3D
+118,WEST BENGAL STATE MARKETING BOARD,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SDRJrn9Uk4%2BNbVN5Z%2B22JUA%3D%3D
+119,WEST BENGAL STATE POLICE HOUSING CO. LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S5FIu7XOOxbx9wOqkqqWHx9S0Fec7wUuNy1YFXyqSerE%3D
+120,WEST BENGAL STATE SEED CORPORATION LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SXM%2FYCEphTGb9h5IHaViEmNS0Fec7wUuNy1YFXyqSerE%3D
+121,WEST BENGAL STATE WAREHOUSING CORPORATION,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=S5v%2BQk4U71hywqUxlAzvuMNS0Fec7wUuNy1YFXyqSerE%3D
+122,WEST BENGAL SURFACE TRANSPORT CORPORATION LTD.,https://wbtenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SXCKz8u3pn97sUopD0NnghNS0Fec7wUuNy1YFXyqSerE%3D -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>West Bengal | Latest</title>
+    <style>
+        *{
+            margin: auto;
+        }
+    .popup {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    animation: fadeOut 3s ease-in;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+        td {
+            border: 1px solid black;
+            justify-content: center;
+            text-align: center;
+            font-size: 30px;
+            margin: auto;
+            padding: 15px;
+        }
+
+        .name{
+            margin: auto;
+            text-align: center;
+            font-size: 70px;
+            font-family: 'Zen Kaku Gothic Antique', sans-serif;
+            color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div class="name">West Bengal</div>
+    <table>
+    </table>
+    <script>
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            const popup = document.createElement('div');
+            popup.classList.add('popup');
+            popup.innerText = 'Copied to clipboard. Open in a new tab.';
+            document.body.appendChild(popup);
+            setTimeout(() => {
+                document.body.removeChild(popup);
+            }, 3000);
+        }
+
+        onload = fetch("./West Bengal.csv").then(res => {
+            return res.text();
+        }).then(data => {
+            let result = data.split(/\r?\n|\r/).map(row => {
+                return row.split(",");
+            });
+
+            result.forEach(row => {
+                let htmlRow = row.map(cell => {
+                    if (cell.startsWith("http://") || cell.startsWith("https://")) {
+                        return `<td><button onclick="copyToClipboard('${cell}')">Copy Link</button></td>`;
+                    } else {
+                        return `<td>${cell}</td>`;
+                    }
+                }).join("");
+
+                let tableRow = document.createElement("tr");
+                tableRow.innerHTML = htmlRow.trim();
+
+                if (tableRow.innerText !== "") {
+                    document.querySelector("table").appendChild(tableRow);
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        onload = fetch("./organization/Assam.csv").then(res => {
+            return res.text()
+        }).then(data => {
+            let result = data.split(/\r?\n|\r/).map(row => {
+                return row.split(",");
+            });
+
+            result.forEach(row => {
+                let htmlRow = row.map(cell => {
+                    if (cell.startsWith("http://") || cell.startsWith("https://")) {
+                        return `<td><button onclick="copyToClipboard('${cell}')">Copy Link</button></td>`;
+                    } else {
+                        return `<td>${cell}</td>`;
+                    }
+                }).join("");
+
+                let tableRow = document.createElement("tr");
+                tableRow.innerHTML = htmlRow.trim();
+
+                if (tableRow.innerText !== "") {
+                    document.querySelector("table").appendChild(tableRow);
+                }
+            });
+        });
+    </script>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        onload = fetch("./organization/Rajasthan.csv").then(res => {
+            return res.text()
+        }).then(data=>{
+            let result=data.split(/\r?\n|\r/).map(e=>{
+                return e.split(",")
+            })
+            result.forEach(e=>{
+                let m=e.map(e=>{
+                    if (e.startsWith("http://") || e.startsWith("https://")) {
+                        return `<td><a href="${e}" target="_blank">${e}</a></td>`;
+                    } else {
+                        return `<td>${e}</td>`;
+                    }
+                }).join("")
+                let ce=document.createElement("tr");
+                ce.innerHTML=m;
+                if(ce.innerText!=""){
+                    document.querySelector("table").appendChild(ce);
+                }
+                console.log(m)
+            })
+        })
+    </script>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        td{
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        onload = fetch("./organization/Assam.csv").then(res => {
+            return res.text()
+        }).then(data=>{
+            let result=data.split(/\r?\n|\r/).map(e=>{
+                return e.split(",")
+            })
+            result.forEach(e=>{
+                let m=e.map(e=>{
+                    return `<td>${e}</td>`;
+                }).join("")
+                let ce=document.createElement
+                ("tr");
+                ce.innerHTML=m;
+                if(ce.innerText!=""){
+                    document.querySelector("table").appendChild(ce);
+                }
+                console.log(m)
+            })
+        })
+    </script>
+</body>
+</html> --> -->

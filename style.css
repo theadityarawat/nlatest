@@ -1,0 +1,79 @@
+      * {
+        margin: auto;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #e3f2fd; /* Light blue background */
+        margin: 0;
+      }
+
+      .popup {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #2196f3; /* Blue */
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        animation: fadeOut 3s ease-in;
+      }
+
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .name {
+        margin: auto;
+        text-align: center;
+        font-size: 70px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        color: #2196f3; /* Blue */
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 80%;
+        margin: auto;
+        border-collapse: collapse;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff; /* White background */
+      }
+
+      tr.first-row {
+        background-color: #2196f3; /* Blue for the first row */
+        color: white;
+      }
+
+      td {
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      td button {
+        background-color: #2196f3; /* Blue */
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 3px;
+      }
+
+      td button:hover {
+        background-color: #1565c0; /* Darker blue on hover */
+      }
